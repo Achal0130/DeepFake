@@ -3,9 +3,10 @@ import os
 from distutils.dir_util import copy_tree
 import shutil
 import numpy as np
-import split_folders
+import splitfolders
 
-base_path = '.\\train_sample_videos\\'
+base_path = './train_sample_videos'
+
 dataset_path = '.\\prepared_dataset\\'
 print('Creating Directory: ' + dataset_path)
 os.makedirs(dataset_path, exist_ok=True)
@@ -61,5 +62,5 @@ for fname in random_faces:
 print('Down-sampling Done!')
 
 # Split into Train/ Val/ Test folders
-split_folders.ratio(dataset_path, output='split_dataset', seed=1377, ratio=(.8, .1, .1)) # default values
+splitfolders.ratio(dataset_path, output='split_dataset', seed=1377, ratio=(.8, .1, .1)) # default values
 print('Train/ Val/ Test Split Done!')

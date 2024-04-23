@@ -2,16 +2,17 @@ import cv2
 from mtcnn import MTCNN
 import sys, os.path
 import json
-from keras import backend as K
 import tensorflow as tf
+
 print(tf.__version__)
 tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 
+# Check for available physical devices
 physical_devices = tf.config.list_physical_devices('GPU')
-print(physical_devices)
-tf.config.experimental.set_memory_growth(physical_devices[0], True)
+if physical_devices:
+    tf.config.experimental.set_memory_growth(physical_devices[0], True)
 
-base_path = '.\\train_sample_videos\\'
+base_path = './train_sample_videos/'
 
 def get_filename_only(file_path):
     file_basename = os.path.basename(file_path)
@@ -66,4 +67,3 @@ for filename in metadata.keys():
                 cv2.imwrite(new_filename, cv2.cvtColor(crop_image, cv2.COLOR_RGB2BGR))
             else:
                 print('Skipped a face..')
-    
